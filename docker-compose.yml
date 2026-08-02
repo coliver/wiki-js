@@ -8,8 +8,8 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       DB_USER: wiki
-      DB_PASSWORD: ${DB_PASS}
-      DB_DATABASE: wikijs
+      DB_PASS: ${DB_PASS}
+      DB_NAME: wikijs
       TZ: UTC
     volumes:
       - wiki_data:/wiki
