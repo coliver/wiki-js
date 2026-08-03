@@ -50,7 +50,7 @@ services:
     volumes:
       - letsencrypt:/etc/letsencrypt
       - ./letsencrypt/www:/var/www/certbot
-    entrypoint: ["sh","-c"]
+    entrypoint: ["sh", "-c"]
     command: >
       certbot certonly --webroot -w /var/www/certbot
       --preferred-challenges http
@@ -62,8 +62,6 @@ services:
         ; sleep 43200;
       done
     restart: unless-stopped
-
-
 
 volumes:
   wiki_data:
