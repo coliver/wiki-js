@@ -50,23 +50,20 @@ services:
     volumes:
       - letsencrypt:/etc/letsencrypt
       - ./letsencrypt/www:/var/www/certbot
-    entrypoint:
-      - sh
-      - -c
-      - >
-        certbot certonly
-          --webroot -w /var/www/certbot
-          -d murderhobos.wiki
-          --email chrisgeorgeoliver@gmail.com
-          --agree-tos
-          --non-interactive
-          --no-eff-email
-          --verbose
-        && while true; do
-          certbot renew --webroot -w /var/www/certbot --quiet
-          ; sleep 43200
-        done
+    entrypoint: ["sh","-c"]
+    command: >
+      certbot certonly --webroot -w /var/www/certbot
+      --preferred-challenges http
+      -d murderhobos.wiki
+      --email chrisgeorgeoliver@gmail.com
+      --agree-tos --non-interactive --no-eff-email --verbose
+      && while true; do
+        certbot renew --webroot -w /var/www/certbot --preferred-challenges http --quiet
+        ; sleep 43200;
+      done
     restart: unless-stopped
+
+
 
 volumes:
   wiki_data:
