@@ -45,23 +45,33 @@ services:
       - ./letsencrypt/www:/var/www/certbot:ro
     restart: unless-stopped
 
-certbot:
-  image: certbot/certbot:latest
-  volumes:
-    - letsencrypt:/etc/letsencrypt
-    - ./letsencrypt/www:/var/www/certbot
-  entrypoint: >
-    /bin/sh -c
-    "set -e;
-     certbot certonly --webroot -w /var/www/certbot
-       -d murderhobos.wiki
-       --non-interactive --agree-tos --no-eff-email;
-     trap exit TERM;
-     while :; do
-       certbot renew --webroot -w /var/www/certbot --quiet;
-       sleep 12h;
-     done"
-  restart: unless-stopped
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+      - ./letsencrypt/www:/var/www/certbot     
+    entrypoint: >
+      /bin/sh -c
+      "set -e;
+      certbot certonly --webroot -w /var/www/certbot \
+        -d murderhobos.wiki \
+        --non-interactive --agree-tos --no-eff-email --verbose;
+      trap exit TERM;
+      while :; do
+        certbot renew --webroot -w /var/www/certbot --quiet;
+        sleep 12h;
+      done"
+
+    # entrypoint: ["sh","-c"]
+    # command: >
+    #   certbot certonly --webroot -w /var/www/certbot -d murderhobos.wiki
+    #   --non-interactive --agree-tos --no-eff-email --verbose
+    #   && while :; do
+    #     certbot renew --webroot -w /var/www/certbot --non-interactive --agree-tos --no-eff-email
+    #     --quiet
+    #     && sleep 12h
+    #   done
+    restart: unless-stopped
 
 volumes:
   wiki_data:
