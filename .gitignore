@@ -1,0 +1,33 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / JS
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+coverage/
+
+# Logs
+*.log
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# IDE/editor
+.vscode/
+.idea/
+*.swp
+
+# Docker
+docker-compose.override.yml
+
+# Windows
+[Bb]in/
+[Bb]uild/
