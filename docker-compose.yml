@@ -55,7 +55,7 @@ services:
       certbot certonly --webroot -w /var/www/certbot
       --preferred-challenges http
       -d murderhobos.wiki
-      --email chrisgeorgeoliver@gmail.com
+      --email ${EMAIL}
       --agree-tos --non-interactive --no-eff-email --verbose
       && while true; do
         certbot renew --webroot -w /var/www/certbot --preferred-challenges http --quiet
