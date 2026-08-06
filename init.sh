@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+# Note: This file is basically an outline of what needs to happen on the container. This does not get run anywhere
+# And is here for reference.
 set -a            # export all variables loaded next
 source ./.env
 set +a
