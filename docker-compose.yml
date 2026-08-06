@@ -65,8 +65,8 @@ services:
       --email ${EMAIL}
       --agree-tos --non-interactive --no-eff-email --verbose
       && while true; do
-        certbot renew --webroot -w /var/www/certbot --preferred-challenges http --quiet
-        ; sleep 43200;
+        certbot renew --webroot -w /var/www/certbot --preferred-challenges http --quiet;
+        sleep 43200;
       done"
     restart: unless-stopped
 
