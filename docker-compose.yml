@@ -59,7 +59,7 @@ services:
       - ./letsencrypt/www:/var/www/certbot
     entrypoint: ["sh", "-c"]
     command: >
-      certbot certonly --webroot -w /var/www/certbot
+      "certbot certonly --webroot -w /var/www/certbot
       --preferred-challenges http
       -d ${DOMAIN}
       --email ${EMAIL}
@@ -67,7 +67,7 @@ services:
       && while true; do
         certbot renew --webroot -w /var/www/certbot --preferred-challenges http --quiet
         ; sleep 43200;
-      done
+      done"
     restart: unless-stopped
 
 volumes:
